@@ -10,12 +10,13 @@ namespace reboot {
 	namespace entity {
 		class GameObject {
 		private:
+			std::string m_Name;
 			std::vector<component::Component*> components;
 			unsigned short m_Layer;
 		public:
 			component::Transform* transform;
 		public:
-			GameObject();
+			GameObject(std::string name);
 			~GameObject();
 			void instantinate();
 			void addChild(GameObject* children);

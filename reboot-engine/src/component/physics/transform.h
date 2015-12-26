@@ -26,7 +26,11 @@ namespace reboot {
 
 			void createTransformationMatrix();
 			void updateChildTransform();
-			void Transform::addChild(entity::GameObject* child);
+
+			void addChild(entity::GameObject* child);
+			void removeChild(entity::GameObject* child);
+			void clearChilds();
+
 			virtual void update() override;
 
 			inline void setParent(entity::GameObject* parent) { this->parent = parent; }

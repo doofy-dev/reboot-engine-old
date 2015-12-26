@@ -5,7 +5,8 @@
 
 namespace reboot {
 	namespace entity {
-		GameObject::GameObject() {
+		GameObject::GameObject(std::string name)
+		:m_Name(name), m_Layer(0){
 			transform = &component::Transform();
 			transform->assingGameObject(this);
 		}
@@ -23,8 +24,7 @@ namespace reboot {
 		}
 
 		void GameObject::addChild(GameObject* child) {
-			child->transform->setParent(this);
-			transform->childrens.push_back(child);
+			transform->addChild(child);
 		}
 
 		void GameObject::addCompontent(component::Component* component) {
