@@ -39,6 +39,8 @@ namespace reboot{
 			void UniformValue::connectToShader(GLuint shaderID) {
 				m_Location = glGetUniformLocation(shaderID, m_Name);
 			}
+
+			void UniformValue::load(){}
 		}
 	}
 }

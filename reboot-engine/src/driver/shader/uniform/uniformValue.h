@@ -22,7 +22,7 @@ namespace reboot {
 				void load(GLint location, const vec2& value);
 				void load(GLint location, const vec3& value);
 				void load(GLint location, const vec4& value);
-
+				virtual void load();
 				void load(GLint location, const mat4& uniform);
 
 				GLint getLocation() { return m_Location; }

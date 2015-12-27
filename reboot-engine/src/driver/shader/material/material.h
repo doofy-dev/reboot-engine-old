@@ -12,7 +12,7 @@ namespace reboot {
 			public:
 				Shader* shader;
 			private:
-				std::map<const GLchar*, shader::UniformValue*> m_Locations;
+				std::map<const GLchar*, shader::UniformValue*> m_Uniforms;
 			public:
 				Material(const char* vertexShader, const char* fragmentShader);
 				~Material();

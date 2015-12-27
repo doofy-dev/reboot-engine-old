@@ -13,7 +13,7 @@ namespace reboot {
 			createTransformationMatrix();
 		}
 		
-		Transform::~Transform() :Component(){
+		Transform::~Transform(){
 			for (unsigned int i = 0; i < childrens.size(); i++) {
 				delete &childrens[i];
 			}

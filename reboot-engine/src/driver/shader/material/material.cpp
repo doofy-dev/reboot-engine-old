@@ -14,11 +14,16 @@ namespace reboot {
 
 			void Material::addUniform(shader::UniformValue* value) {
 				value->connectToShader(shader->getID());
-				m_Locations.insert(std::make_pair(value->getName, value));
+				m_Uniforms.insert(std::make_pair(value->getName(), value));
 			}
 
 			shader::UniformValue* Material::getUniform(const GLchar *name) {
-				return m_Locations[name];
+				return m_Uniforms[name];
+			}
+
+			void Material::load() {
+				for (auto iter = m_Uniforms.begin(); iter != m_Uniforms.end(); ++iter)
+					iter->second->load();
 			}
 		}
 	}
