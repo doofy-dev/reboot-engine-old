@@ -17,5 +17,5 @@ void main(){
 	float intensity = 1.0 / length(vpos.xy-light_pos);
 
 	color = o_color*intensity;
-	color = texture(diffuse, textureCoords) * intensity;
+//	color = texture(diffuse, textureCoords) * intensity;
 }

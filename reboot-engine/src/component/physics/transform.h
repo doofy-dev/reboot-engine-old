@@ -11,10 +11,14 @@ namespace reboot {
 	namespace component {
 		class Transform : public Component{
 		private:
-			maths::mat4 m_Transofrmation;
-			maths::mat4 m_Translation;
-			maths::mat4 m_Rotation;
-			maths::mat4 m_Scale;
+			maths::mat4 m_TransofrmationMatrix;
+			maths::mat4 m_TranslationMatrix;
+			maths::mat4 m_RotationMatrix;
+			maths::mat4 m_ScaleMatrix;
+
+			maths::vec3 m_Position;
+			maths::vec3 m_Rotation;
+			maths::vec3 m_Scale;
 
 		public:
 			entity::GameObject *parent;
@@ -31,9 +35,23 @@ namespace reboot {
 			void removeChild(entity::GameObject* child);
 			void clearChilds();
 
-			virtual void update() override;
+			inline maths::vec3& forward() const { return maths::vec3(-m_TransofrmationMatrix.m20, -m_TransofrmationMatrix.m21, -m_TransofrmationMatrix.m22); }
+			inline maths::vec3& backward() const { return maths::vec3(m_TransofrmationMatrix.m20, m_TransofrmationMatrix.m21, m_TransofrmationMatrix.m22); }
+			inline maths::vec3& down() const { return maths::vec3(-m_TransofrmationMatrix.m10, -m_TransofrmationMatrix.m11, -m_TransofrmationMatrix.m12); }
+			inline maths::vec3& up() const { return maths::vec3(m_TransofrmationMatrix.m10, m_TransofrmationMatrix.m11, m_TransofrmationMatrix.m12); }
+			inline maths::vec3& left() const { return maths::vec3(-m_TransofrmationMatrix.m00, -m_TransofrmationMatrix.m01, -m_TransofrmationMatrix.m02); }
+			inline maths::vec3& right() const { return maths::vec3(m_TransofrmationMatrix.m00, m_TransofrmationMatrix.m01, m_TransofrmationMatrix.m02); }
 
-			inline void setParent(entity::GameObject* parent) { this->parent = parent; }
+			void addPosition(maths::vec3& pos);
+			void setPosition(maths::vec3 pos);
+			void addRotation(maths::vec3& rotation);
+			void setRotation(maths::vec3 rotation);
+			void addScale(maths::vec3& scale);
+			void setScale(maths::vec3 scale);
+
+//			virtual void update() override;
+
+			void setParent(entity::GameObject* parent);
 		};
 	}
 }

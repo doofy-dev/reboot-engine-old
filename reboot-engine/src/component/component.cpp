@@ -2,8 +2,9 @@
 #include "../entity/gameObject.h"
 namespace reboot {
 	namespace component {
-		Component::Component() {
-			gameObject = &entity::GameObject();
+		Component::Component(std::string name) {
+			gameObject = nullptr;
+			m_Name = name;
 		}
 
 		Component::~Component(){

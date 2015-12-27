@@ -57,11 +57,12 @@ int main() {
 	VertexArray vaoA, vaoB;
 	
 	IndexBuffer ibo(indices, 6);
-	FrameBuffer buffer(1366, 768);
+//	FrameBuffer buffer(1366, 768);
 	
 	vaoA.addBuffer(new Buffer(verticles, 4 * 3, 3), 0);
 	vaoA.addBuffer(new Buffer(colorsA, 4 * 4, 4), 1);
 	vaoA.addBuffer(new Buffer(textureCoords, 2 * 4, 2), 2);
+
 	vaoB.addBuffer(new Buffer(verticles, 4 * 3, 3), 0);
 	vaoB.addBuffer(new Buffer(colorsB, 4 * 4, 4), 1);
 	vaoB.addBuffer(new Buffer(textureCoords, 2 * 4, 2), 2);
@@ -76,14 +77,13 @@ int main() {
 //	transformation *= mat4::scale(vec3(8, 8, 0));
 	shader.loadUniformMat4f("ml_matrix", transformation);
 	
-	//shader.loadUniform4f("colour", vec4(0.0f, 1.0f, 1.0f, 1.0f));
+	shader.loadUniform4f("colour", vec4(0.0f, 1.0f, 1.0f, 1.0f));
 	shader.loadUniform2f("light_pos", vec2(0, 0));
 
 
 	while (!window.closed())
 	{
 
-		buffer.bind();
 		window.clear();
 		
 		double x, y;
@@ -96,6 +96,7 @@ int main() {
 		vaoA.bind();
 		ibo.bind();
 
+		shader.loadUniform4f("colour", vec4(0.0f, 1.0f, 1.0f, 1.0f));
 		shader.loadUniformMat4f("ml_matrix", mat4::translation(vec3(4, 3, 0)));
 		glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
 		
@@ -105,6 +106,7 @@ int main() {
 		vaoB.bind();
 		ibo.bind();
 
+		shader.loadUniform4f("colour", vec4(0.0f, 1.0f, 1.0f, 1.0f));
 		shader.loadUniformMat4f("ml_matrix", mat4::translation(vec3(0,0,0)));
 		glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
 
@@ -113,29 +115,6 @@ int main() {
 	//	std::cout << fps << " FPS" << std::endl;
 		window.update();
 
-
-		buffer.unbind();
-
-		window.clear();
-
-		window.getMousePosition(x, y);
-
-		shader.loadUniform2f("light_pos", vec2((float)(x* 16.0f / (float)window.getWidht()), (float)(9.0f - y* 9.0f / (float)window.getHeight())));
-#if 0
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-#endif
-		vaoA.bind();
-		ibo.bind();
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, buffer.getTextureID());
-		shader.loadUniformMat4f("ml_matrix", mat4::translation(vec3(4, 3, 0)));
-		glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
-
-		ibo.unbind();
-		vaoA.unbind();
-
-		//	std::cout << fps << " FPS" << std::endl;
-		window.update();
 
 	}
 	return 0;

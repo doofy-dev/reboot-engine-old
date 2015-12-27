@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <string>
 
 namespace reboot {
 	namespace entity {
@@ -9,13 +9,16 @@ namespace reboot {
 	namespace component {
 
 		class Component {
+		private:
+			std::string m_Name;
 		public:
 			entity::GameObject *gameObject;
-			Component();
+			Component(std::string name);
 			virtual ~Component();
 			virtual void update();
 
-			inline void assingGameObject(entity::GameObject* GameObject) { this->gameObject = GameObject; }
+			inline std::string& getName() { return m_Name; }
+			void assingGameObject(entity::GameObject* GameObject);
 		};
 	}
 }
