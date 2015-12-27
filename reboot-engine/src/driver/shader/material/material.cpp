@@ -12,11 +12,12 @@ namespace reboot {
 				delete shader;
 			}
 
-			void Material::addUniform(const GLchar *name) {
-				m_Locations.insert(std::make_pair(name, shader->getUniformLocation(name)));
+			void Material::addUniform(shader::UniformValue* value) {
+				value->connectToShader(shader->getID());
+				m_Locations.insert(std::make_pair(value->getName, value));
 			}
 
-			GLint Material::getUniform(const GLchar *name) {
+			shader::UniformValue* Material::getUniform(const GLchar *name) {
 				return m_Locations[name];
 			}
 		}

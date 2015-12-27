@@ -138,6 +138,13 @@
     <ClCompile Include="src\driver\io\fileUtils.cpp" />
     <ClCompile Include="src\driver\shader\material\material.cpp" />
     <ClCompile Include="src\driver\shader\Shader.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniform1f.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniform1i.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniform2f.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniform3f.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniform4f.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniformMat4.cpp" />
+    <ClCompile Include="src\driver\shader\uniform\uniformValue.cpp" />
     <ClCompile Include="src\driver\window\window.cpp" />
     <ClCompile Include="src\entity\gameObject.cpp" />
     <ClCompile Include="src\math\mat4.cpp" />
@@ -155,6 +162,13 @@
     <ClInclude Include="src\driver\buffer\vertexArray.h" />
     <ClInclude Include="src\driver\shader\material\material.h" />
     <ClInclude Include="src\driver\shader\Shader.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniform1f.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniform1i.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniform2f.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniform3f.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniform4f.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniformMat4.h" />
+    <ClInclude Include="src\driver\shader\uniform\uniformValue.h" />
     <ClInclude Include="src\driver\window\window.h" />
     <ClInclude Include="src\entity\gameObject.h" />
     <ClInclude Include="src\math\convert.h" />

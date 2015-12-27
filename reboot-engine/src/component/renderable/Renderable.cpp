@@ -16,7 +16,7 @@ namespace reboot {
 		}
 
 		void Renderable::prepare() {
-
+			m_Material->load();
 		}
 
 	}

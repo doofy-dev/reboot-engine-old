@@ -34,6 +34,7 @@ namespace reboot {
 
 			void loadUniformMat4f(const GLchar *name, const mat4& uniform);
 
+			inline GLuint getID() { return m_ShaderID; }
 		private:
 			GLuint load();
 			GLuint buildShader(const char* path, GLenum shaderType);

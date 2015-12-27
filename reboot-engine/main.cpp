@@ -7,10 +7,12 @@
 #include "src/driver/buffer/frameBuffer.h"
 
 #include "src/math/maths.h"
+#include "src/driver/shader/uniform/uniform1i.h"
 
 int main() {
 	using namespace reboot;
 	using namespace driver;
+	using namespace shader;
 	using namespace maths;
 
 	Window window("My window", 1366, 768);
@@ -50,7 +52,6 @@ int main() {
 		0.0f, 1.0f, 1.0f, 1.0f,
 		0.0f, 1.0f, 1.0f, 1.0f
 	};
-	
 //  NULLING instance
 //	VertexArray* vaoC = nullptr;
 

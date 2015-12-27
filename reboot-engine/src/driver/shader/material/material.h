@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include "../shader.h"
+#include "../uniform/uniformValue.h"
 #include <map>
 
 namespace reboot {
@@ -11,13 +12,15 @@ namespace reboot {
 			public:
 				Shader* shader;
 			private:
-				std::map<const GLchar*, GLint> m_Locations;
+				std::map<const GLchar*, shader::UniformValue*> m_Locations;
 			public:
 				Material(const char* vertexShader, const char* fragmentShader);
 				~Material();
 
-				void addUniform(const GLchar *name);
-				GLint getUniform(const GLchar* name);
+				void addUniform(shader::UniformValue* value);
+				shader::UniformValue* getUniform(const GLchar* name);
+
+				void load();
 			};
 		}
 	}
