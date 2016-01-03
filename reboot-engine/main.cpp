@@ -183,12 +183,16 @@ int main() {
 
 	VertexArray *vaoA, vaoB;
 	
-	IndexBuffer* ibo = new IndexBuffer(indices, 6*6);
 //	FrameBuffer buffer(1366, 768);
 	vaoA = new VertexArray();
 	vaoA->addBuffer(new Buffer(verticles, 6 * 4 * 3, 3), 0);
 	vaoA->addBuffer(new Buffer(textureCoords, 6 * 4 * 2, 2), 1);
 	vaoA->addBuffer(new Buffer(normals, 6 * 4 * 3, 3), 2);
+
+	VertexArray* vao = new VertexArray();
+	IndexBuffer* ibo = FileUtils::load_obj(vao, "res/frigate.obj");
+	
+
 	//vaoA->addBuffer(new Buffer(colorsA, 4 * 4, 4), 1);
 
 	vaoB.addBuffer(new Buffer(verticles, 4 * 3, 3), 0);
@@ -197,11 +201,11 @@ int main() {
 	mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 	mat4 perspective = mat4::perspective(90, 16.0f / 9.0f, 0.01f, 1000);
 
-	mat4 transformation = mat4::translation(vec3(0, 0, -5));
+	mat4 transformation = mat4::translation(vec3(0, 0, -30))* mat4::scale(vec3(0.3f,0.3f,0.3f));
 
 
 	
-	Texture brick("res/img.png");
+	Texture brick("res/frigate.png");
 
 	GameObject* go = new GameObject("GO1");
 	Material* material = new Material("shaders/basic.vert", "shaders/basic.frag");
@@ -224,7 +228,7 @@ int main() {
 	material->addUniform(&light_pos);
 	material->addTexture(GL_TEXTURE0, &brick);
 
-	Renderable renderable(ibo, vaoA, material);
+	Renderable renderable(ibo, vao, material);
 	go->addCompontent(&renderable);
 
 	scene->assingGameObject(*go);
@@ -251,7 +255,7 @@ int main() {
 #ifdef NEWSYSTEM
 		rend.render();
 		rend.flush();
-		ml_matrix.setValue(mat4::rotation(0.1f, vec3(1, 0, 1)) * ml_matrix.getValue() );
+		ml_matrix.setValue(mat4::rotation(0.1f, vec3(0, 1, 0)) * ml_matrix.getValue());
 	//	mat4 m = mat4::translation(vec3(1,2,0)) * (rand()%6-3);
 	//	ml_matrix.setValue(m);
 #else

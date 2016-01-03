@@ -1,7 +1,8 @@
 #pragma once
 
 #include <GL/glew.h>
-
+#include <vector>
+#include "../../math/maths.h"
 namespace reboot {
 	namespace driver {
 
@@ -17,6 +18,8 @@ namespace reboot {
 			void unbind() const;
 			
 			inline GLuint Buffer::getComponentCount()const { return m_CompoentCount; }
+		private:
+			void load(GLfloat* data, GLsizei count, GLuint componentCount);
 		};
 
 	}

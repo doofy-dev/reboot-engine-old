@@ -25,7 +25,6 @@ namespace reboot {
 		//		std::cout << "Rendering : " << object->getName() << std::endl;
 				component::Renderable* renderable = object.getRenderable();
 				renderable->bind();
-				
 				glDrawElements(renderable->getRendeMode(),
 					renderable->getIBO()->getCount(), GL_UNSIGNED_SHORT, 0);
 				
