@@ -69,14 +69,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)lib\GLEW\include;$(SolutionDir)lib\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lib\GLEW\lib;$(SolutionDir)lib\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)lib\SOIL\src;$(SolutionDir)lib\GLEW\include;$(SolutionDir)lib\OPENAL\include;$(SolutionDir)lib\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\GLEW\lib;$(SolutionDir)lib\GLFW\lib-vc2015;$(SolutionDir)lib\OPENAL\lib;$(SolutionDir)lib\SOIL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)lib\GLEW\include;$(SolutionDir)lib\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lib\GLEW\lib;$(SolutionDir)lib\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)lib\SOIL\src;$(SolutionDir)lib\GLEW\include;$(SolutionDir)lib\OPENAL\include;$(SolutionDir)lib\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\GLEW\lib;$(SolutionDir)lib\GLFW\lib-vc2015;$(SolutionDir)lib\OPENAL\lib;$(SolutionDir)lib\SOIL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\intermediates\</IntDir>
   </PropertyGroup>
@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;SOIL.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +110,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;SOIL.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,6 +131,7 @@
     <ClCompile Include="src\component\component.cpp" />
     <ClCompile Include="src\component\physics\transform.cpp" />
     <ClCompile Include="src\component\renderable\Renderable.cpp" />
+    <ClCompile Include="src\driver\audio\audioSource.cpp" />
     <ClCompile Include="src\driver\buffer\buffer.cpp" />
     <ClCompile Include="src\driver\buffer\frameBuffer.cpp" />
     <ClCompile Include="src\driver\buffer\indexBuffer.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="src\driver\io\fileUtils.cpp" />
     <ClCompile Include="src\driver\shader\material\material.cpp" />
     <ClCompile Include="src\driver\shader\Shader.cpp" />
+    <ClCompile Include="src\driver\shader\texture\texture.cpp" />
     <ClCompile Include="src\driver\shader\uniform\uniform1f.cpp" />
     <ClCompile Include="src\driver\shader\uniform\uniform1i.cpp" />
     <ClCompile Include="src\driver\shader\uniform\uniform2f.cpp" />
@@ -158,12 +160,14 @@
     <ClInclude Include="src\component\component.h" />
     <ClInclude Include="src\component\physics\transform.h" />
     <ClInclude Include="src\component\renderable\Renderable.h" />
+    <ClInclude Include="src\driver\audio\audioSource.h" />
     <ClInclude Include="src\driver\buffer\buffer.h" />
     <ClInclude Include="src\driver\buffer\frameBuffer.h" />
     <ClInclude Include="src\driver\buffer\indexBuffer.h" />
     <ClInclude Include="src\driver\buffer\vertexArray.h" />
     <ClInclude Include="src\driver\shader\material\material.h" />
     <ClInclude Include="src\driver\shader\Shader.h" />
+    <ClInclude Include="src\driver\shader\texture\texture.h" />
     <ClInclude Include="src\driver\shader\uniform\uniform1f.h" />
     <ClInclude Include="src\driver\shader\uniform\uniform1i.h" />
     <ClInclude Include="src\driver\shader\uniform\uniform2f.h" />

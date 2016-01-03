@@ -3,7 +3,7 @@
 namespace reboot{
 	namespace driver {
 		namespace shader {
-			UniformValue::UniformValue(const char* name, GLuint shaderID) 
+			UniformValue::UniformValue(const GLchar* name, GLuint shaderID) 
 			:m_Name(name){
 			}
 
@@ -15,7 +15,7 @@ namespace reboot{
 			}
 
 			void UniformValue::load(GLint location, int value) {
-				glUniform1f(location, value);
+				glUniform1i(location, value);
 			}
 
 			void UniformValue::load(GLint location, const vec2& value) {
@@ -27,6 +27,7 @@ namespace reboot{
 			}
 
 			void UniformValue::load(GLint location, const vec4& value) {
+				//std::cout << "loading " << m_Name << " in " << m_Location << " or "<<location << std::endl;
 				glUniform4f(location, value.x, value.y, value.z, value.w);
 			}
 
@@ -38,6 +39,12 @@ namespace reboot{
 
 			void UniformValue::connectToShader(GLuint shaderID) {
 				m_Location = glGetUniformLocation(shaderID, m_Name);
+				
+				std::cout << "Setting " << m_Name << " in Shader(" << shaderID << ") location("<<m_Location << ")" << std::endl;
+
+//				GLint result;
+			//	glGetShaderiv(shaderID, GL_GET_UNI, &result);
+
 			}
 
 			void UniformValue::load(){}

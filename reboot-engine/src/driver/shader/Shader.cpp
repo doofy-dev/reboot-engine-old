@@ -1,5 +1,5 @@
 #include "shader.h"
-
+#include <GL/glew.h>
 namespace reboot {
 	namespace driver {
 		Shader::Shader(const char *vertPath, const char *fragPath) {
@@ -7,15 +7,42 @@ namespace reboot {
 			m_FragPath = fragPath;
 
 			m_ShaderID = load();
-			if (m_ShaderID == 0)
+			std::cout << "Shader created with ID: " << m_ShaderID << std::endl;
+			if (m_ShaderID == 0) {
+				std::cout << "Deleting shader because of errors!" << std::endl;
 				glDeleteProgram(m_ShaderID);
+			}
+
+			GLint numActiveAttribs = 0;
+			GLint numActiveUniforms = 0;
+			glGetProgramiv(m_ShaderID, GL_ACTIVE_ATTRIBUTES, &numActiveAttribs);
+			glGetProgramiv(m_ShaderID, GL_ACTIVE_UNIFORMS, &numActiveUniforms);
+
+			for (int unif = 0; unif < numActiveUniforms; ++unif)
+			{
+
+				std::vector<GLchar> nameData(256);
+				GLint arraySize = 0;
+				GLenum type = 0;
+				GLsizei actualLength = 0;
+				glGetActiveUniform(m_ShaderID, unif, nameData.size(), &actualLength, &arraySize, &type, &nameData[0]);
+				std::string name((char*)&nameData[0], actualLength - 1);
+				for (unsigned int i = 0; i < 255; i++) {
+					std::cout << nameData[i];
+				}
+				std::cout << std::endl;
+				nameData.clear();
+			}
+			
 		}
 
 		Shader::~Shader() {
+			std::cout << "Deleting shader(" << m_ShaderID << ")" << std::endl;
 			glDeleteProgram(m_ShaderID);
 		}
 
 		void Shader::enable() const {
+		//	std::cout << "Enabling shader(" << m_ShaderID << ")" << std::endl;
 			glUseProgram(m_ShaderID);
 		}
 
@@ -58,9 +85,10 @@ namespace reboot {
 
 			GLuint fragment = buildShader(m_FragPath, GL_FRAGMENT_SHADER);
 			GLuint vertex = buildShader(m_VertPath,GL_VERTEX_SHADER);
-			if (fragment == 0 || vertex == 0)
+			if (fragment == 0 || vertex == 0) {
+				std::cout << "Shader creation failed!" << std::endl;
 				return 0;
-
+			}
 			glAttachShader(program, vertex);
 			glAttachShader(program, fragment);
 			glLinkProgram(program);

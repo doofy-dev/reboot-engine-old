@@ -8,7 +8,7 @@ namespace reboot {
 		GameObject::GameObject(std::string name)
 		:m_Name(name), m_Layer(0){
 			m_Renderable = nullptr;
-			transform = &component::Transform();
+			transform = new component::Transform();
 			transform->assingGameObject(this);
 			instantinate();
 		}
@@ -16,8 +16,8 @@ namespace reboot {
 		GameObject::~GameObject() {
 			for (unsigned int i = 0; i < transform->childrens.size(); i++)
 				delete transform->childrens[i];
-			delete transform;
-			delete m_Renderable;
+		//	delete transform;
+		//	delete m_Renderable;
 			for (unsigned int i = 0; i < components.size(); i++) {
 				delete &components[i];
 			}

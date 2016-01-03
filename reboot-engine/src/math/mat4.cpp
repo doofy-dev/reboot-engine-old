@@ -155,25 +155,25 @@ namespace reboot {
 		}
 
 		void mat4::getArray(float(&data)[16]) const {
-			data[0] = m00;
-			data[1] = m10;
-			data[2] = m20;
-			data[3] = m30;
+				data[0] = m00;
+				data[1] = m10;
+				data[2] = m20;
+				data[3] = m30;
 
-			data[4] = m01;
-			data[5] = m11;
-			data[6] = m21;
-			data[7] = m31;
+				data[4] = m01;
+				data[5] = m11;
+				data[6] = m21;
+				data[7] = m31;
 
-			data[8] = m02;
-			data[9] = m12;
-			data[10] = m22;
-			data[11] = m32;
+				data[8] = m02;
+				data[9] = m12;
+				data[10] = m22;
+				data[11] = m32;
 
-			data[12] = m03;
-			data[13] = m13;
-			data[14] = m23;
-			data[15] = m33;
+				data[12] = m03;
+				data[13] = m13;
+				data[14] = m23;
+				data[15] = m33;
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const mat4& matrix) {

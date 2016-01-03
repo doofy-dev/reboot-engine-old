@@ -1,21 +1,14 @@
 #version 330 core
 
-layout (location = 1) in vec2 textureCoords;
-
+in vec2 passTextureCoords;
 out vec4 color;
-
-
-//uniform vec4 colour;
 uniform vec2 light_pos;
-uniform sampler2D diffuse;
+uniform vec4 colour;
+uniform sampler2D textureSample;
 
-in vec4 o_color;
-in vec4 vpos;
 
-void main(){
+void main(){	
 
-	float intensity = 1.0 / length(vpos.xy-light_pos);
 
-	color = o_color*intensity;
-//	color = texture(diffuse, textureCoords) * intensity;
+	color = texture(textureSample, passTextureCoords);
 }

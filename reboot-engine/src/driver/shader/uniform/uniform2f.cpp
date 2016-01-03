@@ -10,15 +10,15 @@ namespace reboot {
 			Uniform2f::~Uniform2f() {
 
 			}
-			void Uniform2f::setValue(maths::vec2* value) {
+			void Uniform2f::setValue(maths::vec2& value) {
 				m_Value = value;
 			}
 
 			void Uniform2f::load() {
-				UniformValue::load(UniformValue::getLocation(), *m_Value);
+				UniformValue::load(UniformValue::getLocation(), m_Value);
 			}
 
-			maths::vec2* Uniform2f::getValue() {
+			maths::vec2& Uniform2f::getValue() {
 				return m_Value;
 			}
 		}

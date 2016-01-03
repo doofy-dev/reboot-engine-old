@@ -11,15 +11,15 @@ namespace reboot {
 
 			}
 
-			void Uniform3f::setValue(maths::vec3* value) {
+			void Uniform3f::setValue(maths::vec3& value) {
 				m_Value = value;
 			}
 
 			void Uniform3f::load() {
-				UniformValue::load(UniformValue::getLocation(), *m_Value);
+				UniformValue::load(UniformValue::getLocation(), m_Value);
 			}
 
-			maths::vec3* Uniform3f::getValue() {
+			maths::vec3& Uniform3f::getValue() {
 				return m_Value;
 			}
 		}

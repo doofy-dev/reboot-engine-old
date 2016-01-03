@@ -22,10 +22,12 @@ namespace reboot {
 			
 			inline void Renderable::addBuffer(driver::Buffer* buffer, unsigned short location){ vertexArray->addBuffer(buffer, location); }
 			inline void Renderable::setRendeMode(unsigned short renderMode) { this->renderMode = renderMode; }
-			inline driver::IndexBuffer* getIBO() { return indexBuffer; }
-			inline driver::VertexArray* getVAO() { return vertexArray; }
-			inline driver::shader::Material* getMaterial() { return m_Material; }
-			void prepare();
+			inline GLuint Renderable::getRendeMode() { return renderMode; }
+			inline driver::IndexBuffer* Renderable::getIBO() { return indexBuffer; }
+			inline driver::VertexArray* Renderable::getVAO() { return vertexArray; }
+			inline driver::shader::Material* Renderable::getMaterial() { return m_Material; }
+			void bind();
+			void unbind();
 		};
 	}
 }

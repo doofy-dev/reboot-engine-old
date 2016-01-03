@@ -11,15 +11,16 @@ namespace reboot {
 
 			}
 
-			void UniformMat4::setValue(maths::mat4* value) {
+			void UniformMat4::setValue(maths::mat4& value) {
 				m_Value = value;
 			}
 
 			void UniformMat4::load() {
-				UniformValue::load(UniformValue::getLocation(), *m_Value);
+		//		std::cout << "Loading matrix into "<< m_Location <<std::endl << m_Value << std::endl;
+				UniformValue::load(UniformValue::getLocation(), m_Value);
 			}
 
-			maths::mat4* UniformMat4::getValue() {
+			maths::mat4& UniformMat4::getValue() {
 				return m_Value;
 			}
 		}

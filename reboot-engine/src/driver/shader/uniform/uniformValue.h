@@ -9,11 +9,12 @@ namespace reboot {
 			using namespace maths;
 			class UniformValue {
 			private:
-				const char* m_Name;
+				const GLchar* m_Name;
+			protected:
 				GLint m_Location;
 
 			public:
-				UniformValue(const char* name, GLuint shaderID);
+				UniformValue(const GLchar* name, GLuint shaderID);
 				void connectToShader(GLuint shaderID);
 				virtual ~UniformValue();
 				void load(GLint location, float value);

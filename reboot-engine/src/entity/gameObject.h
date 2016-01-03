@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vector>
+#include "../component/renderable/Renderable.h"
 
 namespace reboot {
 	namespace component {
 		class Component;
 		class Transform;
-		class Renderable;
 	}
 	namespace entity {
 		class GameObject {
@@ -27,11 +27,13 @@ namespace reboot {
 			void addCompontent(component::Component* component);
 			void addCompontent(component::Renderable* component);
 
+			std::string GameObject::getName() { return m_Name; }
+
 			component::Component* getComponent(std::string name);
 			inline void setLayer(unsigned short layer) { m_Layer = layer; }
 			inline unsigned short getLayer() const { return m_Layer; }
 			
-			//@TODO: getRenderer, clone, remove, init
+			//@TODO: remove
 
 			inline component::Renderable* GameObject::getRenderable() {
 				return m_Renderable;
