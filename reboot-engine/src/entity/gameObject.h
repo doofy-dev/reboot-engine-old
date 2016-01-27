@@ -23,6 +23,8 @@ namespace reboot {
 			~GameObject();
 
 			virtual void instantinate();
+			virtual void update();
+
 			void addChild(GameObject* children);
 			void addCompontent(component::Component* component);
 			void addCompontent(component::Renderable* component);

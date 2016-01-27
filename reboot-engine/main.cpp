@@ -12,7 +12,10 @@
 #include "src/renderer/scene/scene.h"
 #include "src/renderer/engine/renderer.h"
 #include "src/entity/gameObject.h"
+#include "src/entity/camera.h"
 #include "src/component/renderable/Renderable.h"
+#include "src/component/physics/transform.h"
+#include "src/component/control/freeMove.h"
 #include "src/driver/shader/uniform/uniformMat4.h"
 #include "src/driver/shader/uniform/uniform2f.h"
 #include "src/driver/shader/uniform/uniform4f.h"
@@ -209,12 +212,14 @@ int main() {
 
 	GameObject* go = new GameObject("GO1");
 	Material* material = new Material("shaders/basic.vert", "shaders/basic.frag");
-	UniformMat4 pr_matrix("pr_matrix",0);
+
+	/*UniformMat4 pr_matrix("mvp.projection",0);
 	pr_matrix.setValue(perspective);
-
-	UniformMat4 ml_matrix("ml_matrix", 0);
+	//go->transform->setPosition(vec3(0, 0, -5));
+	/*
+	UniformMat4 ml_matrix("mvp.model", 0);
 	ml_matrix.setValue(transformation);
-
+	//*/
 
 	Uniform4f colour("colour", 0);
 	colour.setValue(vec4(0.0f, 1.0f, 0.0f, 1.0f));
@@ -222,16 +227,22 @@ int main() {
 	Uniform2f light_pos("light_pos", 0);
 	light_pos.setValue(vec2(0.0f, 0.0f));
 
-	material->addUniform(&pr_matrix);
+	//material->addUniform(&pr_matrix);
 	material->addUniform(&colour);
-	material->addUniform(&ml_matrix);
+	go->transform->setPosition(vec3(0, 0, -30));
+	go->transform->setScale(vec3(0.3f, 0.3f, 0.3f));
+	//material->addUniform(&ml_matrix);
+	/*
+	material->addUniform(new UniformMat4("mvp.model", 0));
+	material->addUniform(new UniformMat4("mvp.view", 0));
+	material->addUniform(new UniformMat4("mvp.projection", 0));
+	//*/
 	material->addUniform(&light_pos);
 	material->addTexture(GL_TEXTURE0, &brick);
 
 	Renderable renderable(ibo, vao, material);
 	go->addCompontent(&renderable);
-
-	scene->assingGameObject(*go);
+	scene->assingGameObject(go);
 #define NEWSYSTEM 1
 
 #ifndef  NEWSYSTEM
@@ -248,16 +259,27 @@ int main() {
 #endif // ! NEWSYSTEM
 
 
-	new AudioSource("res/wind.wav");
-
+//	new AudioSource("res/wind.wav");
+	PerspectiveCamera cam (1366,768);
+	Camera camera(&cam,window);
+	camera.addCompontent(new control::FreeMove(window));
+	scene->assingGameObject(&camera);
+//		ml_matrix.setValue(mat4::rotation(45, vec3(0, 1, 0)) * ml_matrix.getValue());
 	while (!window->closed())
 	{
 #ifdef NEWSYSTEM
-		rend.render();
+		rend.render(camera);
 		rend.flush();
-		ml_matrix.setValue(mat4::rotation(0.1f, vec3(0, 1, 0)) * ml_matrix.getValue());
+		window->setMouseGrabbed(window->isMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT));
+		/*double dx, dy;
+		if (window->isGrabbed()) {
+			window->getMouseMove(dx, dy);
+			camera.transform->addRotation(maths::vec3(-dy / 5.0f, -dx / 5.0f, 0));
+		}*/
 	//	mat4 m = mat4::translation(vec3(1,2,0)) * (rand()%6-3);
-	//	ml_matrix.setValue(m);
+	//	go->transform->addRotation(vec3(0, 0.1f, 0));
+	//	ml_matrix.setValue(mat4::rotation(0.1f, vec3(0, 1, 0)) * ml_matrix.getValue());
+		//ml_matrix.setValue(m);
 #else
 		window->clear();
 		

@@ -11,7 +11,7 @@ namespace reboot {
 //				delete m_GameObjects[i];
 		}
 
-		void Scene::assingGameObject(entity::GameObject& gameObject) {
+		void Scene::assingGameObject(entity::GameObject* gameObject) {
 			m_GameObjects.push_back(gameObject);
 		}
 
@@ -26,7 +26,7 @@ namespace reboot {
 
 		void Scene::callUpdate() {
 			for (unsigned int i = 0; i < m_GameObjects.size(); i++)
-				m_GameObjects[i].executeUpdate();
+				m_GameObjects[i]->executeUpdate();
 		}
 	}
 }

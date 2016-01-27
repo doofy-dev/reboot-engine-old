@@ -41,6 +41,12 @@ namespace reboot {
 			inline maths::vec3& up() const { return maths::vec3(m_TransofrmationMatrix.m10, m_TransofrmationMatrix.m11, m_TransofrmationMatrix.m12); }
 			inline maths::vec3& left() const { return maths::vec3(-m_TransofrmationMatrix.m00, -m_TransofrmationMatrix.m01, -m_TransofrmationMatrix.m02); }
 			inline maths::vec3& right() const { return maths::vec3(m_TransofrmationMatrix.m00, m_TransofrmationMatrix.m01, m_TransofrmationMatrix.m02); }
+			inline maths::mat4& getTransformationMatrix() { return m_TransofrmationMatrix; }
+			inline maths::vec3& getWorldPosition() { return maths::vec3(m_TranslationMatrix.m30, m_TranslationMatrix.m31, m_TranslationMatrix.m32); }
+			inline maths::vec3& getWorldRotation() { return maths::vec3(m_TranslationMatrix.m00, m_TranslationMatrix.m01, m_TranslationMatrix.m02); }
+			inline maths::vec3 getPosition() { return m_Position; }
+			inline maths::vec3 getRotation() { return m_Rotation; }
+
 
 			void addPosition(maths::vec3& pos);
 			void setPosition(maths::vec3 pos);
@@ -48,6 +54,7 @@ namespace reboot {
 			void setRotation(maths::vec3 rotation);
 			void addScale(maths::vec3& scale);
 			void setScale(maths::vec3 scale);
+
 
 //			virtual void update() override;
 

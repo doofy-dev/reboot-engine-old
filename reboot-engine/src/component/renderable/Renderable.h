@@ -15,6 +15,7 @@ namespace reboot {
 			driver::IndexBuffer* indexBuffer;
 			driver::VertexArray* vertexArray;
 			GLuint renderMode;
+			GLuint m_ModelMatrixLocation;
 			driver::shader::Material* m_Material;
 		public:
 			Renderable(driver::IndexBuffer* ibo, driver::VertexArray* vao, driver::shader::Material* material);

@@ -1,5 +1,8 @@
 #include "Renderable.h"
 
+#include "../../entity/gameObject.h"
+#include "../physics/transform.h"
+
 namespace reboot {
 	namespace component {
 
@@ -8,6 +11,7 @@ namespace reboot {
 			m_Material = material;
 			indexBuffer = ibo;
 			vertexArray = vao;
+			m_ModelMatrixLocation = m_Material->getUniformLocation("mvp.model");
 			//*/
 		}
 
@@ -19,6 +23,8 @@ namespace reboot {
 
 		void Renderable::bind() {
 			m_Material->load();
+			if(gameObject!=nullptr)
+				m_Material->shader->loadUniformMat4f(m_ModelMatrixLocation, gameObject->transform->getTransformationMatrix());
 			vertexArray->bind();
 			indexBuffer->bind();
 		}

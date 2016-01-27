@@ -7,10 +7,13 @@ namespace reboot {
 		bool Window::m_MouseButtons[MAX_BUTTONS];
 		double Window::mx;
 		double Window::my;
+		double Window::dx;
+		double Window::dy;
 
 		Window::Window(const char *title, int width, int height) {
 			m_Title = title;
 			m_Width = width;
+			m_MouseGrabbed = false;
 			m_Height = height;
 			if (!init()) 
 				glfwTerminate();
@@ -20,6 +23,8 @@ namespace reboot {
 				m_MouseButtons[i] = false;
 			mx = 0;
 			my = 0;
+			dx = 0;
+			dy = 0;
 		}
 
 		bool Window::init() {
@@ -57,9 +62,13 @@ namespace reboot {
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
-
+		void Window::setMouseGrabbed(bool grabbed) {
+			m_MouseGrabbed = grabbed;
+			glfwSetInputMode(m_Window, GLFW_CURSOR, (grabbed? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL));
+		}
 		void Window::update() {
-
+			dx = 0;
+			dy = 0;
 			GLenum error = glGetError();
 			if (errno != GL_NO_ERROR) {
 				std::cout << "OpenGL error: " << error << std::endl;
@@ -100,6 +109,8 @@ namespace reboot {
 		}
 		void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
 			Window*	win = (Window*)glfwGetWindowUserPointer(window);
+			win->dx = win->mx - xpos;
+			win->dy = win->my - ypos;
 			win->mx = xpos;
 			win->my = ypos;
 		}

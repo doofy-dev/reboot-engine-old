@@ -18,12 +18,13 @@ namespace reboot {
 				delete transform->childrens[i];
 		//	delete transform;
 		//	delete m_Renderable;
-			for (unsigned int i = 0; i < components.size(); i++) {
+	/*		for (unsigned int i = 0; i < components.size(); i++) {
 				delete &components[i];
-			}
+			}*/
 		}
 
 		void GameObject::instantinate() {}
+		void GameObject::update() {}
 
 		void GameObject::addChild(GameObject* child) {
 			transform->addChild(child);
@@ -35,10 +36,12 @@ namespace reboot {
 		}
 
 		void GameObject::addCompontent(component::Renderable* component) {
+			component->assingGameObject(this);
 			m_Renderable = component;
 		}
 
 		void GameObject::executeUpdate() {
+			update();
 			for (unsigned int i = 0; i < components.size(); i++)
 				components[i]->update();
 			for (unsigned int i = 0; i < transform->childrens.size(); i++)

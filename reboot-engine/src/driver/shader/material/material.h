@@ -23,7 +23,7 @@ namespace reboot {
 				void addUniform(shader::UniformValue* value);
 				void addTexture(GLuint location, shader::Texture* texture);
 				shader::UniformValue* getUniform(const GLchar* name);
-
+				GLuint getUniformLocation(const GLchar* name);
 				void load();
 				void unload();
 			};

@@ -33,6 +33,18 @@ namespace reboot {
 			void loadUniform4f(const GLchar *name, const vec4& value);
 
 			void loadUniformMat4f(const GLchar *name, const mat4& uniform);
+			void loadUniformMat4f(const GLchar *name, mat4& uniform);
+
+			void loadUniform1f(GLuint location, float value);
+			void loadUniform1i(GLuint location, int value);
+
+			void loadUniform2f(GLuint location, const vec2& value);
+			void loadUniform3f(GLuint location, const vec3& value);
+			void loadUniform4f(GLuint location, const vec4& value);
+
+			void loadUniformMat4f(GLuint location, const mat4& uniform);
+			void loadUniformMat4f(GLuint location, mat4& uniform);
+
 
 			inline GLuint getID() { return m_ShaderID; }
 		private:

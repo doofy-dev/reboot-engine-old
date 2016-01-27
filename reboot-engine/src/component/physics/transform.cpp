@@ -14,9 +14,7 @@ namespace reboot {
 		}
 		
 		Transform::~Transform(){
-			for (unsigned int i = 0; i < childrens.size(); i++) {
-				delete &childrens[i];
-			}
+			clearChilds();
 		}
 
 		void Transform::addChild(entity::GameObject* child) {
@@ -30,20 +28,23 @@ namespace reboot {
 		}
 
 		void Transform::createTransformationMatrix() {
-			mat4 m_RotationMatrix(1.0f);
-			m_RotationMatrix.rotation(m_Rotation.x, vec3(1, 0, 0));
-			m_RotationMatrix.rotation(m_Rotation.y, vec3(0, 1, 0));
+			mat4 m_RotationMatrix =
+			m_RotationMatrix.rotation(m_Rotation.x, vec3(1, 0, 0))*
+			m_RotationMatrix.rotation(m_Rotation.y, vec3(0, 1, 0))*
 			m_RotationMatrix.rotation(m_Rotation.z, vec3(0, 0, 1));
 
 			m_TranslationMatrix = mat4::translation(m_Position);
 			m_ScaleMatrix = mat4::scale(m_Scale);
+			
 			if (parent != nullptr) {
 				m_RotationMatrix = parent->transform->m_RotationMatrix * m_RotationMatrix;
 				m_ScaleMatrix = parent->transform->m_ScaleMatrix * m_ScaleMatrix;
 				m_TranslationMatrix = parent->transform->m_TranslationMatrix * m_TranslationMatrix;
 			}
-			m_TransofrmationMatrix = m_TranslationMatrix * m_RotationMatrix*m_ScaleMatrix;
+			
+			m_TransofrmationMatrix = m_TranslationMatrix * m_RotationMatrix * m_ScaleMatrix;
 			updateChildTransform();
+//			std::cout << "Transform created: "<<std::endl << m_TransofrmationMatrix << std::endl;
 		}
 
 		void Transform::updateChildTransform() {

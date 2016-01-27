@@ -21,6 +21,10 @@ namespace reboot {
 				shader->disable();
 			}
 
+			GLuint Material::getUniformLocation(const GLchar* name) {
+				return shader->getUniformLocation(name);
+			}
+
 			shader::UniformValue* Material::getUniform(const GLchar *name) {
 				return m_Uniforms[name];
 			}

@@ -54,32 +54,64 @@ namespace reboot {
 			return glGetUniformLocation(m_ShaderID,name);
 		}
 
+		void Shader::loadUniform1f(GLuint location, float value) {
+			glUniform1f(location, value);
+		}
+
+		void Shader::loadUniform1i(GLuint location, int value) {
+			glUniform1i(location, value);
+		}
+
+		void Shader::loadUniform2f(GLuint location, const vec2& value) {
+			glUniform2f(location, value.x, value.y);
+		}
+
+		void Shader::loadUniform3f(GLuint location, const vec3& value) {
+			glUniform3f(location, value.x, value.y, value.z);
+		}
+
+		void Shader::loadUniform4f(GLuint location, const vec4& value) {
+			glUniform4f(location, value.x, value.y, value.z, value.w);
+		}
+
+		void Shader::loadUniformMat4f(GLuint location, const mat4& uniform) {
+			float data[16];
+			uniform.getArray(data);
+			glUniformMatrix4fv(location, 1, GL_FALSE, data);
+		}
+
+		void Shader::loadUniformMat4f(GLuint location, mat4& uniform) {
+			float data[16];
+			uniform.getArray(data);
+			glUniformMatrix4fv(location, 1, GL_FALSE, data);
+		}
+
 		void Shader::loadUniform1f(const GLchar *name, float value) {
-			glUniform1f(getUniformLocation(name), value);
+			loadUniform1f(getUniformLocation(name), value);
 		}
 
 		void Shader::loadUniform1i(const GLchar *name, int value) {
-			glUniform1i(getUniformLocation(name), value);
+			loadUniform1i(getUniformLocation(name), value);
 		}
 
 		void Shader::loadUniform2f(const GLchar *name, const vec2& value) {
-			glUniform2f(getUniformLocation(name), value.x, value.y);
+			loadUniform2f(getUniformLocation(name), value);
 		}
 
 		void Shader::loadUniform3f(const GLchar *name, const vec3& value) {
-			glUniform3f(getUniformLocation(name), value.x, value.y, value.z);
+			loadUniform3f(getUniformLocation(name), value);
 		}
 
 		void Shader::loadUniform4f(const GLchar *name, const vec4& value) {
-			glUniform4f(getUniformLocation(name), value.x, value.y, value.z, value.w);
+			loadUniform4f(getUniformLocation(name), value);
 		}
 
 		void Shader::loadUniformMat4f(const GLchar *name, const mat4& uniform) {
-			float data[16];
-			uniform.getArray(data);
-			glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, data);
+			loadUniformMat4f(getUniformLocation(name),uniform);
 		}
-
+		void Shader::loadUniformMat4f(const GLchar *name, mat4& uniform) {
+			loadUniformMat4f(getUniformLocation(name), uniform);
+		}
 		GLuint Shader::load() {
 			GLuint program = glCreateProgram();
 

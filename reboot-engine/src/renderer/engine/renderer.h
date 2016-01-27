@@ -3,6 +3,7 @@
 #include <vector>
 #include <GL/glew.h>
 #include "../../driver/window/window.h"
+#include "../../entity/camera.h"
 
 namespace reboot {
 	namespace renderer {
@@ -16,7 +17,7 @@ namespace reboot {
 			Renderer(renderer::Scene *scene, driver::Window *window);
 			~Renderer();
 
-			void render();
+			void render(entity::Camera &camera);
 			void flush();
 		};
 	}
