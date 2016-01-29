@@ -13,6 +13,7 @@ namespace reboot {
 
 		void Scene::assingGameObject(entity::GameObject* gameObject) {
 			m_GameObjects.push_back(gameObject);
+			std::cout << "Creatin gameObject " << gameObject->getName() << " in the scene. Count :" << m_GameObjects.size() << std::endl;
 		}
 
 		void Scene::removeGameObject(entity::GameObject* gameObject) {

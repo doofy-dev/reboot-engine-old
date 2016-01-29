@@ -20,6 +20,7 @@ namespace reboot {
 		void Transform::addChild(entity::GameObject* child) {
 			child->transform->setParent(gameObject);
 			childrens.push_back(child);
+			createTransformationMatrix();
 		}
 
 		void Transform::setParent(entity::GameObject* parent) {
@@ -35,14 +36,35 @@ namespace reboot {
 
 			m_TranslationMatrix = mat4::translation(m_Position);
 			m_ScaleMatrix = mat4::scale(m_Scale);
-			
-			if (parent != nullptr) {
-				m_RotationMatrix = parent->transform->m_RotationMatrix * m_RotationMatrix;
+
+			entity::GameObject* par = parent;
+			std::vector<entity::GameObject*> branch;
+			while (par != nullptr) {
+				branch.push_back(par);
+				par = par->transform->parent;
+			}
+			int count = branch.size();
+	//		std::cout << count << std::endl;
+
+
+			mat4 transform(1.0f);
+
+			//std::cout << transform << std::endl;
+		/*	for (unsigned  i = count; i-- >0;)
+			{
+				transform *= branch[i]->transform->m_TranslationMatrix*branch[i]->transform->m_RotationMatrix*branch[i]->transform->m_ScaleMatrix;
+			}
+		//	std::cout << transform << std::endl;
+		/*	if (parent != nullptr) {
+
+				m_TransofrmationMatrix = parent->transform->getTransformationMatrix();
+			/*	m_RotationMatrix = parent->transform->m_RotationMatrix * m_RotationMatrix;
 				m_ScaleMatrix = parent->transform->m_ScaleMatrix * m_ScaleMatrix;
 				m_TranslationMatrix = parent->transform->m_TranslationMatrix * m_TranslationMatrix;
 			}
-			
-			m_TransofrmationMatrix = m_TranslationMatrix * m_RotationMatrix * m_ScaleMatrix;
+			//*/
+
+			m_TransofrmationMatrix = transform * m_TranslationMatrix * m_RotationMatrix * m_ScaleMatrix;
 			updateChildTransform();
 //			std::cout << "Transform created: "<<std::endl << m_TransofrmationMatrix << std::endl;
 		}

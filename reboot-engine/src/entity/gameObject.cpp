@@ -10,12 +10,11 @@ namespace reboot {
 			m_Renderable = nullptr;
 			transform = new component::Transform();
 			transform->assingGameObject(this);
-			instantinate();
 		}
 
 		GameObject::~GameObject() {
-			for (unsigned int i = 0; i < transform->childrens.size(); i++)
-				delete transform->childrens[i];
+		//	for (unsigned int i = 0; i < transform->childrens.size(); i++)
+		//		delete transform->childrens[i];
 		//	delete transform;
 		//	delete m_Renderable;
 	/*		for (unsigned int i = 0; i < components.size(); i++) {
@@ -23,7 +22,11 @@ namespace reboot {
 			}*/
 		}
 
-		void GameObject::instantinate() {}
+		void GameObject::instantinate(renderer::Scene* scene) {
+			scene->assingGameObject(this);
+			for (int i = 0; i < transform->childrens.size(); i++)
+				transform->childrens[i]->instantinate(scene);
+		}
 		void GameObject::update() {}
 
 		void GameObject::addChild(GameObject* child) {

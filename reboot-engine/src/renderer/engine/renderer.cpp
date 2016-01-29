@@ -38,7 +38,7 @@ namespace reboot {
 				renderable->getMaterial()->shader->loadUniformMat4f("mvp.projection", projection);
 #endif
 				glDrawElements(renderable->getRendeMode(),
-					renderable->getIBO()->getCount(), GL_UNSIGNED_SHORT, 0);
+					renderable->getIBO()->getCount(), GL_UNSIGNED_INT, 0);
 				
 				renderable->unbind();
 			}

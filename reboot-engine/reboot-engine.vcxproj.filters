@@ -108,6 +108,9 @@
     <ClCompile Include="src\component\control\freeMove.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\driver\loader\modelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\driver\window\window.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\component\control\freeMove.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\driver\loader\modelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

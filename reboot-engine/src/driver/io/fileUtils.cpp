@@ -20,7 +20,7 @@ namespace reboot {
 		IndexBuffer* FileUtils::load_obj(VertexArray* vao, const char* path) {
 			using namespace maths;
 			Assimp::Importer importer;
-			std::vector<unsigned short> indices;
+			std::vector<unsigned int> indices;
 			std::vector<float> vertices;
 			std::vector<float> uvs;
 			std::vector<float> normals;

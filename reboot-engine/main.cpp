@@ -21,6 +21,7 @@
 #include "src/driver/shader/uniform/uniform4f.h"
 #include "src/driver/shader/uniform/uniform3f.h"
 #include "src\driver\audio\audioSource.h"
+#include "src/driver/loader/modelLoader.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -208,7 +209,8 @@ int main() {
 
 
 	
-	Texture brick("res/frigate.png");
+	//Texture brick("res/frigate.png");
+	Texture brick("res/building/125_0013.jpg");
 
 	GameObject* go = new GameObject("GO1");
 	Material* material = new Material("shaders/basic.vert", "shaders/basic.frag");
@@ -221,14 +223,14 @@ int main() {
 	ml_matrix.setValue(transformation);
 	//*/
 
-	Uniform4f colour("colour", 0);
+	/*Uniform4f colour("colour", 0);
 	colour.setValue(vec4(0.0f, 1.0f, 0.0f, 1.0f));
-
+	*/
 	Uniform2f light_pos("light_pos", 0);
 	light_pos.setValue(vec2(0.0f, 0.0f));
 
 	//material->addUniform(&pr_matrix);
-	material->addUniform(&colour);
+	//material->addUniform(&colour);
 	go->transform->setPosition(vec3(0, 0, -30));
 	go->transform->setScale(vec3(0.3f, 0.3f, 0.3f));
 	//material->addUniform(&ml_matrix);
@@ -242,7 +244,18 @@ int main() {
 
 	Renderable renderable(ibo, vao, material);
 	go->addCompontent(&renderable);
-	scene->assingGameObject(go);
+	//scene->assingGameObject(go);
+	
+	//GameObject* loaded = ModelLoader::loadModel("res/paris/","Paris2010_0.obj",scene);
+//	GameObject* loaded = ModelLoader::loadModel("res/iron-man/","Iron_Man_mark_42.obj",scene);
+	//GameObject* loaded = ModelLoader::loadModel("res/","frigate.obj",scene);
+	//GameObject* loaded = ModelLoader::loadModel("res/sci-fy_city/","Center City Sci-Fi.obj",scene);
+	//GameObject* loaded = ModelLoader::loadModel("res/volkswagen/","Volkswagen Polo 1995 [obj].obj", scene);
+	//GameObject* loaded = ModelLoader::loadModel("res/building/", "build.3ds", scene);
+	//GameObject* loaded = ModelLoader::loadModel("res/atlantis/", "atlantis.obj", scene);
+	GameObject* loaded = ModelLoader::loadModel("res/sirius/","sirus city.obj" , scene);
+	//scene->assingGameObject(loaded);
+	loaded->instantinate(scene);
 #define NEWSYSTEM 1
 
 #ifndef  NEWSYSTEM
@@ -267,6 +280,8 @@ int main() {
 //		ml_matrix.setValue(mat4::rotation(45, vec3(0, 1, 0)) * ml_matrix.getValue());
 	while (!window->closed())
 	{
+		if (window->isKeyPressed(GLFW_KEY_ESCAPE))
+			break;
 #ifdef NEWSYSTEM
 		rend.render(camera);
 		rend.flush();
@@ -303,6 +318,8 @@ int main() {
 #endif
 
 	}
+
+//	getchar();
 	return 0;
 }
 

@@ -2,11 +2,15 @@
 
 #include <vector>
 #include "../component/renderable/Renderable.h"
+#include "../renderer/scene/scene.h"
 
 namespace reboot {
 	namespace component {
 		class Component;
 		class Transform;
+	}
+	namespace renderer {
+		class Scene;
 	}
 	namespace entity {
 		class GameObject {
@@ -22,7 +26,7 @@ namespace reboot {
 			GameObject(std::string name);
 			~GameObject();
 
-			virtual void instantinate();
+			virtual void instantinate(renderer::Scene *scene);
 			virtual void update();
 
 			void addChild(GameObject* children);

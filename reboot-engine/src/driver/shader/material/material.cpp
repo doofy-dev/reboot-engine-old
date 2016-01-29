@@ -37,8 +37,9 @@ namespace reboot {
 
 			void Material::load() {
 				shader->enable();
-				for (auto iter = m_Uniforms.begin(); iter != m_Uniforms.end(); ++iter)
+				for (auto iter = m_Uniforms.begin(); iter != m_Uniforms.end(); ++iter) {
 					iter->second->load();
+				}
 
 				for (auto iter = m_Texures.begin(); iter != m_Texures.end(); ++iter)
 					iter->second->bind(iter->first);

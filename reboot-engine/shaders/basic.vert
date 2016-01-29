@@ -10,12 +10,12 @@ uniform struct{
 	mat4 projection;
 } mvp;
 
-
-
 out vec2 passTextureCoords;
+out vec4 out_color;
 
 void main(){
 	passTextureCoords = textureCoords;
+
 	gl_Position = mvp.projection  * mvp.view * mvp.model * vec4(position,1);
 
 }
